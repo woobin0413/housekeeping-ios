@@ -1,0 +1,87 @@
+// !$*UTF8*$!
+{
+    archiveVersion = 1;
+    classes = {};
+    objectVersion = 77;
+    objects = {
+        A00000000000000000000001 = {
+            isa = PBXProject;
+            attributes = { BuildIndependentTargetsInParallel = YES; LastUpgradeCheck = 2600; TargetAttributes = { A00000000000000000000002 = { CreatedOnToolsVersion = 26.0; }; A00000000000000000000003 = { CreatedOnToolsVersion = 26.0; TestTargetID = A00000000000000000000002; }; }; };
+            buildConfigurationList = A00000000000000000000010;
+            compatibilityVersion = "Xcode 16.0";
+            developmentRegion = en;
+            hasScannedForEncodings = 0;
+            knownRegions = (en, Base);
+            mainGroup = A00000000000000000000004;
+            preferredProjectObjectVersion = 77;
+            productRefGroup = A00000000000000000000005;
+            packageReferences = (B00000000000000000000001);
+            projectDirPath = "";
+            projectRoot = "";
+            targets = (A00000000000000000000002, A00000000000000000000003, C00000000000000000000001);
+        };
+        A00000000000000000000002 = {
+            isa = PBXNativeTarget;
+            buildConfigurationList = A00000000000000000000011;
+            buildPhases = (B00000000000000000000005, A00000000000000000000020, A00000000000000000000021, A00000000000000000000022);
+            buildRules = ();
+            dependencies = ();
+            fileSystemSynchronizedGroups = (A00000000000000000000006);
+            name = HouseKeeping;
+            packageProductDependencies = (B00000000000000000000002);
+            productName = HouseKeeping;
+            productReference = A00000000000000000000008;
+            productType = "com.apple.product-type.application";
+        };
+        A00000000000000000000003 = {
+            isa = PBXNativeTarget;
+            buildConfigurationList = A00000000000000000000012;
+            buildPhases = (A00000000000000000000023, A00000000000000000000024, A00000000000000000000025);
+            buildRules = ();
+            dependencies = (A00000000000000000000026);
+            fileSystemSynchronizedGroups = (A00000000000000000000007);
+            name = HouseKeepingUITests;
+            productName = HouseKeepingUITests;
+            productReference = A00000000000000000000009;
+            productType = "com.apple.product-type.bundle.ui-testing";
+        };
+        A00000000000000000000004 = { isa = PBXGroup; children = (A00000000000000000000006, A00000000000000000000007, C00000000000000000000002, B00000000000000000000004, A00000000000000000000005); sourceTree = "<group>"; };
+        A00000000000000000000005 = { isa = PBXGroup; children = (A00000000000000000000008, A00000000000000000000009, C00000000000000000000003); name = Products; sourceTree = "<group>"; };
+        A00000000000000000000006 = { isa = PBXFileSystemSynchronizedRootGroup; path = HouseKeeping; sourceTree = "<group>"; };
+        A00000000000000000000007 = { isa = PBXFileSystemSynchronizedRootGroup; path = HouseKeepingUITests; sourceTree = "<group>"; };
+        A00000000000000000000008 = { isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HouseKeeping.app; sourceTree = BUILT_PRODUCTS_DIR; };
+        A00000000000000000000009 = { isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HouseKeepingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+        A00000000000000000000010 = { isa = XCConfigurationList; buildConfigurations = (A00000000000000000000030, A00000000000000000000031); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+        A00000000000000000000011 = { isa = XCConfigurationList; buildConfigurations = (A00000000000000000000032, A00000000000000000000033); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+        A00000000000000000000012 = { isa = XCConfigurationList; buildConfigurations = (A00000000000000000000034, A00000000000000000000035); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+        A00000000000000000000020 = { isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+        A00000000000000000000021 = { isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (B00000000000000000000003); runOnlyForDeploymentPostprocessing = 0; };
+        A00000000000000000000022 = { isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+        A00000000000000000000023 = { isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+        A00000000000000000000024 = { isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+        A00000000000000000000025 = { isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+        A00000000000000000000026 = { isa = PBXTargetDependency; target = A00000000000000000000002; targetProxy = A00000000000000000000027; };
+        A00000000000000000000027 = { isa = PBXContainerItemProxy; containerPortal = A00000000000000000000001; proxyType = 1; remoteGlobalIDString = A00000000000000000000002; remoteInfo = HouseKeeping; };
+        A00000000000000000000030 = { isa = XCBuildConfiguration; baseConfigurationReference = B00000000000000000000004; buildSettings = { CLANG_ENABLE_MODULES = YES; SDKROOT = iphoneos; IPHONEOS_DEPLOYMENT_TARGET = 18.0; SWIFT_VERSION = 6.0; SWIFT_OPTIMIZATION_LEVEL = "-Onone"; DEBUG_INFORMATION_FORMAT = dwarf; }; name = Debug; };
+        A00000000000000000000031 = { isa = XCBuildConfiguration; baseConfigurationReference = B00000000000000000000004; buildSettings = { CLANG_ENABLE_MODULES = YES; SDKROOT = iphoneos; IPHONEOS_DEPLOYMENT_TARGET = 18.0; SWIFT_VERSION = 6.0; SWIFT_COMPILATION_MODE = wholemodule; }; name = Release; };
+        A00000000000000000000032 = { isa = XCBuildConfiguration; buildSettings = { GENERATE_INFOPLIST_FILE = YES; INFOPLIST_FILE = Configuration/Info.plist; INFOPLIST_KEY_CFBundleDisplayName = HouseKeeping; INFOPLIST_KEY_UILaunchScreen_Generation = YES; INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES; INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"; PRODUCT_BUNDLE_IDENTIFIER = com.housekeeping.designpreview; PRODUCT_NAME = "$(TARGET_NAME)"; TARGETED_DEVICE_FAMILY = 1; CURRENT_PROJECT_VERSION = 1; MARKETING_VERSION = 0.1; ENABLE_PREVIEWS = YES; CODE_SIGN_STYLE = Automatic; SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG; }; name = Debug; };
+        A00000000000000000000033 = { isa = XCBuildConfiguration; buildSettings = { GENERATE_INFOPLIST_FILE = YES; INFOPLIST_FILE = Configuration/Info.plist; INFOPLIST_KEY_CFBundleDisplayName = HouseKeeping; INFOPLIST_KEY_UILaunchScreen_Generation = YES; INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES; INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"; PRODUCT_BUNDLE_IDENTIFIER = com.housekeeping.designpreview; PRODUCT_NAME = "$(TARGET_NAME)"; TARGETED_DEVICE_FAMILY = 1; CURRENT_PROJECT_VERSION = 1; MARKETING_VERSION = 0.1; ENABLE_PREVIEWS = YES; CODE_SIGN_STYLE = Automatic; }; name = Release; };
+        A00000000000000000000034 = { isa = XCBuildConfiguration; buildSettings = { GENERATE_INFOPLIST_FILE = YES; PRODUCT_BUNDLE_IDENTIFIER = com.housekeeping.designpreview.uitests; PRODUCT_NAME = "$(TARGET_NAME)"; TEST_TARGET_NAME = HouseKeeping; TARGETED_DEVICE_FAMILY = 1; CODE_SIGN_STYLE = Automatic; SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG; }; name = Debug; };
+        A00000000000000000000035 = { isa = XCBuildConfiguration; buildSettings = { GENERATE_INFOPLIST_FILE = YES; PRODUCT_BUNDLE_IDENTIFIER = com.housekeeping.designpreview.uitests; PRODUCT_NAME = "$(TARGET_NAME)"; TEST_TARGET_NAME = HouseKeeping; TARGETED_DEVICE_FAMILY = 1; CODE_SIGN_STYLE = Automatic; }; name = Release; };
+        B00000000000000000000001 = { isa = XCRemoteSwiftPackageReference; repositoryURL = "https://github.com/supabase/supabase-swift.git"; requirement = { kind = exactVersion; version = 2.55.1; }; };
+        B00000000000000000000002 = { isa = XCSwiftPackageProductDependency; package = B00000000000000000000001; productName = Supabase; };
+        B00000000000000000000003 = { isa = PBXBuildFile; productRef = B00000000000000000000002; };
+        B00000000000000000000004 = { isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Configuration/App.xcconfig; sourceTree = "<group>"; };
+        B00000000000000000000005 = { isa = PBXShellScriptBuildPhase; buildActionMask = 2147483647; files = (); inputPaths = ("$(SRCROOT)/Configuration/validate-public-key.rb"); outputPaths = (); alwaysOutOfDate = 1; runOnlyForDeploymentPostprocessing = 0; name = "Validate public configuration"; shellPath = /bin/sh; shellScript = "/usr/bin/ruby \"$SRCROOT/Configuration/validate-public-key.rb\""; showEnvVarsInLog = 0; };
+        C00000000000000000000001 = { isa = PBXNativeTarget; buildConfigurationList = C00000000000000000000004; buildPhases = (C00000000000000000000005, C00000000000000000000006, C00000000000000000000007); buildRules = (); dependencies = (A00000000000000000000026); fileSystemSynchronizedGroups = (C00000000000000000000002); name = HouseKeepingTests; productName = HouseKeepingTests; productReference = C00000000000000000000003; productType = "com.apple.product-type.bundle.unit-test"; };
+        C00000000000000000000002 = { isa = PBXFileSystemSynchronizedRootGroup; path = HouseKeepingTests; sourceTree = "<group>"; };
+        C00000000000000000000003 = { isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HouseKeepingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+        C00000000000000000000004 = { isa = XCConfigurationList; buildConfigurations = (C00000000000000000000008, C00000000000000000000009); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+        C00000000000000000000005 = { isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+        C00000000000000000000006 = { isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+        C00000000000000000000007 = { isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+        C00000000000000000000008 = { isa = XCBuildConfiguration; buildSettings = { GENERATE_INFOPLIST_FILE = YES; PRODUCT_BUNDLE_IDENTIFIER = com.housekeeping.designpreview.tests; PRODUCT_NAME = "$(TARGET_NAME)"; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HouseKeeping.app/HouseKeeping"; BUNDLE_LOADER = "$(TEST_HOST)"; TARGETED_DEVICE_FAMILY = 1; CODE_SIGN_STYLE = Automatic; SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG; }; name = Debug; };
+        C00000000000000000000009 = { isa = XCBuildConfiguration; buildSettings = { GENERATE_INFOPLIST_FILE = YES; PRODUCT_BUNDLE_IDENTIFIER = com.housekeeping.designpreview.tests; PRODUCT_NAME = "$(TARGET_NAME)"; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HouseKeeping.app/HouseKeeping"; BUNDLE_LOADER = "$(TEST_HOST)"; TARGETED_DEVICE_FAMILY = 1; CODE_SIGN_STYLE = Automatic; }; name = Release; };
+    };
+    rootObject = A00000000000000000000001;
+}

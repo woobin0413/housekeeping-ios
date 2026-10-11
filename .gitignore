@@ -1,0 +1,34 @@
+# macOS and Xcode user/build files
+.DS_Store
+DerivedData/
+build/
+*.xcuserstate
+xcuserdata/
+*.xcresult/
+*.ipa
+*.dSYM/
+
+# Credentials and machine-local configuration (commit templates only)
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.p12
+*.p8
+*.mobileprovision
+ios/HouseKeeping/Configuration/Local.xcconfig
+ios/Configuration/Local.xcconfig
+
+# Local Supabase state; migrations and tests belong in version control
+supabase/.temp/
+supabase/.branches/
+supabase/signing_keys.json
+
+# Future tooling dependencies and test output
+node_modules/
+.build/
+coverage/
+
+# Authorized recognition evaluation inputs/results stay machine-local
+fixtures/recognition/evaluation/
+fixtures/recognition/*.results.json

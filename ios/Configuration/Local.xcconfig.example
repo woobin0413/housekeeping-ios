@@ -1,0 +1,5 @@
+// Create an ignored Local.xcconfig alongside this file with your approved public settings.
+// xcconfig treats // as a comment; $() preserves the URL's double slash.
+HK_SUPABASE_URL = http:/$()/127.0.0.1:55321
+HK_SUPABASE_PUBLISHABLE_KEY = REPLACE_WITH_LOCAL_PUBLISHABLE_OR_ANON_KEY
+// Never use a secret/service-role key. Local HTTP is accepted only in Debug builds.

@@ -1,0 +1,6 @@
+// Public client configuration only. An absent local include is an explicit setup state.
+HK_SUPABASE_URL =
+HK_SUPABASE_PUBLISHABLE_KEY =
+#include? "Local.xcconfig"
+ENABLE_TESTABILITY[config=Debug] = YES
+ONLY_ACTIVE_ARCH[config=Debug] = YES

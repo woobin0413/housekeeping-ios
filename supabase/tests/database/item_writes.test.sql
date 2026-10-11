@@ -1,0 +1,67 @@
+begin;
+create extension if not exists pgtap with schema extensions;
+set local search_path = public, extensions;
+select no_plan();
+insert into auth.users (id,email,email_confirmed_at) values
+ ('71000000-0000-0000-0000-000000000001','write-a@example.invalid',now()),
+ ('71000000-0000-0000-0000-000000000002','write-b@example.invalid',now()),
+ ('71000000-0000-0000-0000-000000000003','write-out@example.invalid',now());
+select private.provision_household('72000000-0000-0000-0000-000000000001','Write home',
+ '71000000-0000-0000-0000-000000000001','71000000-0000-0000-0000-000000000002');
+create temp table write_state (input jsonb, item jsonb);
+insert into write_state (input) values ('{"householdId":"72000000-0000-0000-0000-000000000001","requestId":"73000000-0000-0000-0000-000000000001","name":" Kettle ","description":"Black steel","brand":null,"model":null,"purchasedOn":"2024-02-29","photoId":null}');
+grant all on write_state to authenticated;
+set local role authenticated;
+select set_config('request.jwt.claim.sub','71000000-0000-0000-0000-000000000001',true);
+update write_state set item = public.create_item(input);
+select is((select item->>'name' from write_state),'Kettle','create trims name');
+select is((select item->>'version' from write_state),'1','create starts at version one');
+select is((select public.create_item(input)->>'id' from write_state),(select item->>'id' from write_state),'same request returns same item');
+select is((select public.create_item(input || jsonb_build_object('name',E'\tKettle\n'))->>'id' from write_state),
+ (select item->>'id' from write_state),'tab and newline padding normalize to the same save request');
+select throws_ok($$select public.create_item(input || '{"name":"Changed"}') from write_state$$,'PT409','CONFLICT','changed retry conflicts');
+select throws_ok($$select public.create_item(input || '{"photoId":"74000000-0000-0000-0000-000000000001"}') from write_state$$,'PT409','CONFLICT','retry cannot add a different photo');
+select throws_ok($$select public.create_item(input || '{"createdBy":"71000000-0000-0000-0000-000000000002"}') from write_state$$,'PT422','VALIDATION_ERROR','unknown identity input rejected');
+select throws_ok($$select public.create_item(input || '{"purchasedOn":"2025-02-29"}') from write_state$$,'PT422','VALIDATION_ERROR','invalid calendar date rejected');
+select throws_ok($$select public.create_item(input || '{"name":17}') from write_state$$,'PT422','VALIDATION_ERROR','wrong field type rejected');
+select throws_ok($$select public.create_item(input || '{"requestId":null}') from write_state$$,'PT422','VALIDATION_ERROR','null request rejected');
+select throws_ok($$select public.create_item(input || '{"householdId":"72000000-0000-0000-0000-000000000009"}') from write_state$$,'PT404','NOT_FOUND','foreign create denied');
+select set_config('request.jwt.claim.sub','71000000-0000-0000-0000-000000000002',true);
+update write_state set item = public.update_item(jsonb_build_object('id',item->'id','expectedVersion',1,'fields',jsonb_build_object('name','Spouse edit')));
+select is((select item->>'name' from write_state),'Spouse edit','either spouse can edit');
+select is((select item->>'version' from write_state),'2','edit increments version');
+select is((select item->>'description' from write_state),'Black steel','absent patch field retained');
+select throws_ok($$select public.update_item(jsonb_build_object('id',item->'id','expectedVersion',1,'fields','{"name":"Stale"}'::jsonb)) from write_state$$,'PT409','CONFLICT','stale edit denied');
+select throws_ok($$select public.update_item(jsonb_build_object('id',item->'id','expectedVersion',2,'fields','{}'::jsonb)) from write_state$$,'PT422','VALIDATION_ERROR','empty patch rejected');
+select throws_ok($$select public.update_item(jsonb_build_object('id',item->'id','expectedVersion',2,'fields','{"name":null}'::jsonb)) from write_state$$,'PT422','VALIDATION_ERROR','null name rejected');
+select throws_ok($$select public.update_item(jsonb_build_object('id',item->'id','expectedVersion',2.5,'fields','{"name":"No"}'::jsonb)) from write_state$$,'PT422','VALIDATION_ERROR','fractional version rejected');
+update write_state set item = public.update_item(jsonb_build_object('id',item->'id','expectedVersion',2,'fields','{"description":null}'::jsonb));
+select is((select item->'description' from write_state),'null'::jsonb,'explicit null clears description');
+select set_config('request.jwt.claim.sub','71000000-0000-0000-0000-000000000001',true);
+select is((select public.create_item(input)->>'name' from write_state),'Spouse edit','original create retry survives later edit');
+select is((select count(*) from public.items),1::bigint,'retries create only one purchase');
+select throws_ok($$select public.delete_item(jsonb_build_object('id',item->'id','expectedVersion',1)) from write_state$$,'PT409','CONFLICT','stale deletion denied');
+select set_config('request.jwt.claim.sub','71000000-0000-0000-0000-000000000003',true);
+select throws_ok($$select public.update_item(jsonb_build_object('id',item->'id','expectedVersion',3,'fields','{"name":"Attack"}'::jsonb)) from write_state$$,'PT404','NOT_FOUND','outsider edit denied');
+select throws_ok($$select public.delete_item(jsonb_build_object('id',item->'id','expectedVersion',3)) from write_state$$,'PT404','NOT_FOUND','outsider delete denied');
+select set_config('request.jwt.claim.sub','71000000-0000-0000-0000-000000000002',true);
+select lives_ok($$select public.delete_item(jsonb_build_object('id',item->'id','expectedVersion',3)) from write_state$$,'spouse deletes shared purchase');
+select lives_ok($$select public.delete_item(jsonb_build_object('id',item->'id','expectedVersion',3)) from write_state$$,'delete retry succeeds');
+select is((select count(*) from public.items),0::bigint,'deleted purchase hidden');
+select set_config('request.jwt.claim.sub','71000000-0000-0000-0000-000000000001',true);
+select throws_ok($$select public.create_item(input) from write_state$$,'PT409','CONFLICT','create replay cannot resurrect tombstone');
+reset role;
+delete from public.household_members where user_id = '71000000-0000-0000-0000-000000000001';
+set local role authenticated;
+select throws_ok($$select public.create_item(input) from write_state$$,'PT404','NOT_FOUND','revoked session cannot create');
+select set_config('request.jwt.claim.sub','',true);
+select throws_ok($$select public.create_item('{}')$$,'PT401','UNAUTHENTICATED','missing identity denied');
+reset role;
+set local role anon;
+select throws_ok($$select public.create_item('{}')$$,'42501',null,'anonymous RPC denied');
+reset role;
+set local role service_role;
+select throws_ok($$select public.create_item('{}')$$,'42501',null,'service role has no implicit app RPC');
+reset role;
+select * from finish();
+rollback;
