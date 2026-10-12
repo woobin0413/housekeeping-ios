@@ -2,7 +2,15 @@
 
 **A little order. More home.**
 
-A SwiftUI app for finding household purchases, tracking restock needs and keeping purchase photos private. Two household members can share one inventory.
+A SwiftUI app designed to turn purchase photos into a useful household inventory. Take a photo of a kettle, lamp or other product, review its details, and save it to a shared database so you and another household member can find it later and track what needs restocking.
+
+## How AI helps with the photo
+
+The intended experience is simple: **take a photo → ask for suggestions → review and edit → Save purchase**. AI analyzes the photo and can suggest a name, description, brand and model when it can identify them. For example, a kettle photo could become an editable draft called “Electric kettle,” saving you from filling out every field by hand.
+
+You decide what is stored. Suggestions stay in a draft until you confirm them; saving creates the shared purchase record and attaches its private photo. You can enter the details manually whenever recognition is unavailable.
+
+**Status:** photo capture, private storage and manual saving are implemented. The recognition flow and provider integration are tested with sample responses, but live AI recognition remains disabled pending model evaluation and configuration. The simulator screenshots below use scripted suggestions.
 
 [See it in action](#see-it-in-action) · [Engineering highlights](#engineering-highlights) · [Run the demo](#open-the-prototype) · [Architecture](docs/architecture.md)
 
@@ -13,7 +21,7 @@ A SwiftUI app for finding household purchases, tracking restock needs and keepin
   <img src="docs/design-preview/photo-review-light.png" alt="Offline iPhone sample-photo review with editable purchase name and description" width="280" />
 </p>
 
-**Browse → search → add a purchase → review → save.**
+**Take a photo → review product details → save → find it in your inventory.**
 The screenshots show the offline simulator demo with original artwork and sample data. Photo suggestions in this preview are scripted; live AI recognition is currently disabled.
 
 The connected app adds shared inventory, quantity/restock limits, private photo access and recoverable editing. Hosted and physical-device acceptance remains in progress; see [current status](#current-status).
