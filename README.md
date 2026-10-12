@@ -1,11 +1,33 @@
 # Housekeeping for iOS
 
-A SwiftUI app for shared household inventory, restock tracking and private purchase photos.
+**A little order. More home.**
 
-This repository is a curated showcase with a fresh Git history. Setup uses local environment files and synthetic fixtures.
+A SwiftUI app for finding household purchases, tracking restock needs and keeping purchase photos private. Two household members can share one inventory.
 
+[See it in action](#see-it-in-action) · [Engineering highlights](#engineering-highlights) · [Run the demo](#open-the-prototype) · [Architecture](docs/architecture.md)
 
-A private iPhone household purchase tracker built with **SwiftUI + Supabase**. The intended release gives two spouses separate email/password logins to one shared inventory and photo collection. No public App Store listing is planned.
+## See it in action
+
+<p>
+  <img src="docs/design-preview/inventory-light.png" alt="Offline iPhone inventory preview with purchase search and sample household items" width="280" />
+  <img src="docs/design-preview/photo-review-light.png" alt="Offline iPhone sample-photo review with editable purchase name and description" width="280" />
+</p>
+
+**Browse → search → add a purchase → review → save.**
+The screenshots show the offline simulator demo with original artwork and sample data. Photo suggestions in this preview are scripted; live AI recognition is currently disabled.
+
+The connected app adds shared inventory, quantity/restock limits, private photo access and recoverable editing. Hosted and physical-device acceptance remains in progress; see [current status](#current-status).
+
+## Engineering highlights
+
+| Challenge | Approach | Explore |
+| --- | --- | --- |
+| Keep the household’s data private | Household access policies, private storage and signed-in photo requests | [Architecture](docs/architecture.md) · [Access tests](supabase/tests) |
+| Preserve unfinished edits | Account-scoped draft recovery and explicit conflict handling | [Draft store](ios/HouseKeeping/Data/LocalDraftStore.swift) |
+| Handle photos safely | Prepare upright JPEGs, strip metadata and preserve recoverable upload checkpoints | [Photo preparation](ios/HouseKeeping/Services/PhotoPreparation.swift) |
+| Make native flows usable | SwiftUI previews, light/dark modes and simulator checks for accessible text | [UI tests](ios/HouseKeepingUITests) · [Screenshot gallery](docs/design-preview/README.md) |
+
+The demo runs in an iPhone simulator without account keys. This repository is a curated source showcase for a private household app.
 
 ## Current status
 
